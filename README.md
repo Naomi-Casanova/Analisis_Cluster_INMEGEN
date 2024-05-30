@@ -2,28 +2,38 @@ Analisis_Cluster_INMEGEN
 ===  
 Análisis de las cargas totales y el uso de RAM semanal en las computadoras en INMEGEN 
 
-Codigo base que reproduce mi analisis memoria RAM utilizada y carga semanal 
+Codigo base que reproduce mi analisis de memoria RAM utilizada y carga semanal 
 ===  
-
+Contenido
 - 3 Scripts para realizar cada uno de los siguientes analisis :
-  - Cargas Promedio semanales
-  - Numero total de procesos semanales
-  - Cantidad de memoria RAM utilizada semanalmente
+  - Cargas Promedio semanales (  weekly_proccess_analize.R  ) 
+  - Numero total de procesos semanales ( weekly_proccess_analize.R  ) 
+  - Cantidad de memoria RAM utilizada semanalmente ( total_weekly_RAM_analize.R  )
 - Este repositorio sirve para reproducir los resultados en: URL y DOI de tu paper  
 
-Este pipeline toma como INPUT una carpeta con los archivos que contienen las mediciones tomadas de las computadoras del Instituto.
-Cada archivo contiene las mediciones referentes a un dia, y en el se desglozan las mediciones en ticks de 15-20 minutos aproximadamente.
+Este pipeline toma como INPUT una carpeta con los archivos que contienen las mediciones de uso tomadas de las computadoras del Instituto.
+Cada archivo contiene las mediciones referentes a un dia, las cuales fueron tomadas en ticks de entre 15 y 20 minutos aproximadamente.
 Contacte a Israel Aguilar (iaguilaror@gmail.com) para saber el origen de los datos en detalles.  
 
 Cada pipeline entrega como OUTPUT una tabla CSV que contiene los resultados obtenidos , asi como una grafica en PNG para su visualizacion.
 
 OUTPUTS:
-- Script : " Analisis Cargas Semanales " 
-1) limpia.csv tabla que resume los cambios de SNI solo para DR y DRA;  
-2) resumen.csv tabla que muestra el total de DR y DRA que han perdido el SNI;  
-3) barras.png imagen que muestra el cambio anual en el SNI;  
-4) pay.png imagen que muestra el total de DR y DRA que han perdido el SNI.  
 
+1) Script : " total_weekly_RAM_analize.R "
+   
+    - weekly_RAM.csv tabla que resume la cantidad de RAM utilizada, asi como la cantidad de RAM disponible;  
+    - weekly_RAM.png  grafica ilustrativa de los datos generados en  weekly_RAM.png;
+    
+2) Script : " total_weekly_processes_analize.R "
+   
+    - total_weekly_Process.csv  tabla que resume el numero de procesos usados, asi como la cantidad de procesos disponibles;  
+    - total_weekly_Process.png   grafica ilustrativa de los datos generados en total_weekly_Process.png;
+
+3) Script : " weekly_proccess_analize.R "
+
+    - weekly_Process.csv tabla que resume la carga promedio semanal;  
+    - weekly_Process.png grafica ilustrativa de los datos generados en weekly_Process.csv;
+     
 ---
 ### Features
   **-v 0.0.1**
