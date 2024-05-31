@@ -11,7 +11,7 @@ Contenido
   - Cantidad de memoria RAM utilizada semanalmente ( total_weekly_RAM_analize.R  )
 - Este repositorio sirve para reproducir los resultados en: URL y DOI de tu paper  
 
-Este pipeline toma como INPUT una carpeta con los archivos que contienen las mediciones de uso tomadas de las computadoras del Instituto.
+Este pipeline toma como INPUT una carpeta con los archivos que contienen las mediciones de uso registradas en las computadoras del Instituto.
 Cada archivo contiene las mediciones referentes a un dia, las cuales fueron tomadas en ticks de entre 15 y 20 minutos aproximadamente.
 Contacte a Israel Aguilar (iaguilaror@gmail.com) para saber el origen de los datos en detalles.  
 
@@ -21,8 +21,8 @@ OUTPUTS:
 
 1) Script : " total_weekly_RAM_analize.R "
    
-    - weekly_RAM.csv tabla que resume la cantidad de RAM utilizada, asi como la cantidad de RAM disponible;  
-    - weekly_RAM.png  grafica ilustrativa de los datos generados en  weekly_RAM.png;
+    - total_weekly_RAM.csv tabla que resume la cantidad de RAM utilizada, asi como la cantidad de RAM disponible;  
+    - total_weekly_RAM.png  grafica ilustrativa de los datos generados en  weekly_RAM.png;
     
 2) Script : " total_weekly_processes_analize.R "
    
@@ -38,9 +38,10 @@ OUTPUTS:
 ### Features
   **-v 0.0.1**
 
-* Recibe un archivo CSV con el padron resumido
+* Recibe una carpeta con los archivos de las mediciones.
 * Los resultados incluyen tablas limpias y graficos sencillos
 * Corre en R
+  
 ---
 
 ## Requisitos
@@ -57,7 +58,7 @@ OUTPUTS:
 |:---------:|:--------:|
 | [R](https://www.r-project.org/) | 4.3.2 |
 
-#### paquetes R requeridos:
+#### Raquetes R requeridos:
 
 ```
 pacman: 0.5.1
@@ -78,67 +79,62 @@ git clone git@github.com:Naomi-Casanova/Analisis_SNI.git
 
 ## Replica mi analisis!:
 
-* Tiempo estimado:  **5 minuto(s)**  
+* Tiempo de ejecucion estimado por archivo :  **5 minuto(s)**  
 
 1. Abre el script:  
 ```
-01-clean.R
+ weekly_proccess_analize.R 
 ```
 
 2. Da click en el boton "source" de RStudio.  
 
 3. Abre el script:  
 ```
-02-grafica.R
+weekly_proccess_analize.R
 ```
 
-4. Da click en el boton "source" de RStudio. 
+4. Da click en el boton "source" de RStudio.
 
-5. Revisa los resultados en la carpeta ./results/  
+5. Abre el script:  
+```
+total_weekly_RAM_analize.R  
+```
+6. Da click en el boton "source" de RStudio.
+
+7. Revisa los resultados en la carpeta ./Graficas/  
 
 ---
 
 
 ### Pipeline Inputs
 
-* Un archivo data_original.csv que contiene los cambios anuales del SNI 
-
-Ejemplo del archivo  
-```
-year,nobilis,cambio,miembros
-2000,ARQ.,primer ingreso,4
-2000,BIOL.,primer ingreso,41
-2000,DR.,primer ingreso,4856
-2000,DRA.,primer ingreso,1813
-2000,FIS.,primer ingreso,3
-...
-```
-
----
+* Una carpeta /cluster_logs_para_analisis que contiene los archivos con las mediciones
 
 ### Pipeline Outputs
 
 Dentro del directorio results/ puedes encontrar lo siguiente:
 
-* imagen barras.png: que muestra el grafico de cambio del SNI a lo largo del tiempo.  
-
-* imagen pay.png: que muestra el grafico con el total de miembros SNI que ha perdido su distincion, dividido en DRs y DRAs.  
-
-* tabla limpia.csv: que contiene todos los cambios de distincion del SNI desde 2000 a 2020.  
-
-* tabla resumen.csv: que muestra el total de DRs y DRAs que han perdido el SNI.  
-
+#### Imagenes 
+* weekly_Process: que muestra el grafico con los promedios de carga semanales. 
+* total_weekly_Process.png  : que muestra el grafico con el numero total de procesos utilizados semanalmente.
+* total_weekly_RAM.png : que muestra el grafico con la cantidad de RAM utilizada semanalmente.
+  
+#### Tablas
+* weekly_Process.csv : que muestra los promedios de carga semanales. 
+* total_weekly_Process.csv  : que muestra el numero total de procesos utilizados semanalmente.
+* total_weekly_RAM.csv : que muestra la cantidad de RAM utilizada semanalmente.
 
 ---
 
-### module directory structure
+### Module directory structure
 
 ````
 .
-├── data/       	# directorio con los datos iniciales
-├── results/       # directorio con las tablas y figuras resultantes
-├── 01-clean.R     # script para limpiar la data/
-├── 02-grafica.R   # script para generar los graficos de results/
+├── cluster_logs_para_analisis/   # directorio con los datos iniciales
+├── total_weekly_RAM_analize.R    # script para limpiar la data/
+├── total_weekly_processes_analize.R  # script para generar los graficos de results/
+├── weekly_processes_analize.R  # script para generar los graficos de results/
+├── Graficas/       # directorio con las tablas y figuras resultantes
 └── README.md      # Este readme
 
 ````
@@ -152,7 +148,7 @@ Este repositorio usa varias herramientas de codigo, por favor incluye las siguie
 ---
 
 ### Contacto
-Si tienes preguntas, solicitudes, o bugs para reportar, abre un issue en github, o envia un email a <iaguilaror@gmail.com>  
+Si tienes preguntas, solicitudes, o bugs para reportar, abre un issue en github, o envia un email a <naomicasanova_nncr@ciencias.unam.mx>  
 
 ### Dev Team
 Israel Aguilar-Ordonez <iaguilaror@gmail.com>   
