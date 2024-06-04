@@ -2,12 +2,12 @@ Analisis_Cluster_INMEGEN
 ===  
 Análisis de las cargas totales y el uso de RAM semanal en las computadoras en INMEGEN 
 
-Codigo base que reproduce mi analisis de memoria RAM utilizada y carga semanal 
+Codigo base que reproduce mi analisis de memoria RAM utilizada y cargas semanales
 ===  
 Contenido
 - 3 Scripts para realizar cada uno de los siguientes analisis :
   - Cargas Promedio semanales (  weekly_proccess_analize.R  ) 
-  - Numero total de procesos semanales ( weekly_proccess_analize.R  ) 
+  - Numero total de procesos semanales ( total_weekly_proccesses_analize.R  ) 
   - Cantidad de memoria RAM utilizada semanalmente ( total_weekly_RAM_analize.R  )
 - Este repositorio sirve para reproducir los resultados en: URL y DOI de tu paper  
 
@@ -21,13 +21,17 @@ OUTPUTS:
 
 1) Script : " total_weekly_RAM_analize.R "
    
-    - total_weekly_RAM.csv tabla que resume la cantidad de RAM utilizada, asi como la cantidad de RAM disponible;  
-    - total_weekly_RAM.png  grafica ilustrativa de los datos generados en  weekly_RAM.png;
+    - total_weekly_RAM.csv tabla que resume la cantidad de RAM utilizada, asi como la cantidad 
+      de RAM disponible;  
+    - total_weekly_RAM.png  grafica ilustrativa de los datos presentados en  
+      total_weekly_RAM.csv;
     
 2) Script : " total_weekly_processes_analize.R "
    
-    - total_weekly_Process.csv  tabla que resume el numero de procesos usados, asi como la cantidad de procesos disponibles;  
-    - total_weekly_Process.png   grafica ilustrativa de los datos generados en total_weekly_Process.png;
+    - total_weekly_Process.csv  tabla que resume el numero de procesos usados, asi como la 
+      cantidad de procesos disponibles;  
+    - total_weekly_Process.png  grafica ilustrativa de los datos presentados         
+      total_weekly_Process.csv;
 
 3) Script : " weekly_proccess_analize.R "
 
@@ -38,7 +42,7 @@ OUTPUTS:
 ### Features
   **-v 0.0.1**
 
-* Recibe una carpeta con los archivos de las mediciones.
+* Recibe una carpeta que contiene los archivos de las mediciones.
 * Los resultados incluyen tablas limpias y graficos sencillos
 * Corre en R
   
@@ -83,14 +87,14 @@ git clone git@github.com:Naomi-Casanova/Analisis_SNI.git
 
 1. Abre el script:  
 ```
- weekly_proccess_analize.R 
+weekly_proccess_analize.R 
 ```
 
 2. Da click en el boton "source" de RStudio.  
 
 3. Abre el script:  
 ```
-weekly_proccess_analize.R
+total_weekly_proccesses_analize.R
 ```
 
 4. Da click en el boton "source" de RStudio.
@@ -112,11 +116,12 @@ total_weekly_RAM_analize.R
 
 ### Pipeline Outputs
 
-Dentro del directorio results/ puedes encontrar lo siguiente:
+Dentro del directorio /Graficas/ puedes encontrar lo siguiente:
 
 #### Imagenes 
 * weekly_Process: que muestra el grafico con los promedios de carga semanales. 
-* total_weekly_Process.png  : que muestra el grafico con el numero total de procesos utilizados semanalmente.
+* total_weekly_Process.png  : que muestra el grafico con el numero total de procesos utilizados 
+  semanalmente.
 * total_weekly_RAM.png : que muestra el grafico con la cantidad de RAM utilizada semanalmente.
   
 #### Tablas
