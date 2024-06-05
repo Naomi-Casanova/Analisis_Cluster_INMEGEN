@@ -127,7 +127,7 @@ weekly_total_RAM_GB <- merge( x = usaged , y = available) %>%
 
 View(weekly_total_RAM_GB)
 # Plot -------------------------------------------------------------------------
-ggplot( data = weekly_total_RAM_GB) +
+weekly_total_RAM_GB.G <- ggplot( data = weekly_total_RAM_GB) +
   geom_bar(aes( x = week,
                 y = mem_tot_disp_GB , fill = "Disponible" ),
            stat = "identity" ,alpha =0.4 )  +
@@ -162,8 +162,16 @@ ggplot( data = weekly_total_RAM_GB) +
   scale_color_manual(values=c("transparent","transparent"))+
   scale_fill_manual(name = "Memoria\n",values = c("Disponible" = alpha("hotpink", 0.4))) 
 
+# Saving the plot and the table in a new carpet called "Graficas"
+if (!file.exists("Graficas")) {
+  dir.create("Graficas")
+}
 
-# ====
+write.csv(weekly_total_RAM_GB, file = "weekly_total_RAM_GB.csv", row.names = FALSE)
+
+ggsave("weekly_total_RAM_GB.png", plot = weekly_total_RAM_GB.G,width = 13.3, height = 7.5)
+
+
 
 
 
