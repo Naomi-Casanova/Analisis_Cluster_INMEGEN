@@ -94,13 +94,13 @@ available <- load_by_week %>%
              ungroup( )
 
 # Merge de data with the totals 
- weekly_total <- merge( x = usaged , y = available) %>%
+ weekly_total_process <- merge( x = usaged , y = available) %>%
                  mutate ( proportion_usage = round((carga_tot_usad/carga_tot_dispo)*100,
                                                     digits = 2))
                
 
 # Plot -------------------------------------------------------------------------
-ggplot( data = weekly_total) +
+ weekly_total_process.G <- ggplot( data = weekly_total_process) +
   geom_bar(aes( x = week,
                 y = carga_tot_dispo , fill = "Disponibles" ),
            stat = "identity" ,alpha =0.4 )  +
@@ -135,10 +135,14 @@ ggplot( data = weekly_total) +
   scale_color_manual(values=c("transparent","transparent"))+
   scale_fill_manual(values = c("Disponibles" = alpha("mediumpurple", 0.4), "Utilizados" = "blue")) 
 
-
-# ====
-
-
+ # Saving the plot and the table in a new carpet called "Graficas"
+ dir.create("Graficas")
+ 
+ write.csv(weekly_total_process, file = "weekly_total_process.csv", row.names = FALSE)
+ 
+ ggsave("weekly_total_process.png", plot = weekly_total_process.G,width = 13.3, height = 7.5)
+ 
+ 
 
 
 
