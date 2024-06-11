@@ -1,0 +1,38 @@
+---
+title: "Analisis_Cluster_INMEGEN"
+author: "Naomi Casanova"
+date: "2024-06-11"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+#limpiando el ambiente
+rm(list = ls(all.names = TRUE))
+gc()
+
+# Referenciamos los archivos de cada analisis
+source("total_weekly_processes_analize.R")
+source("total_weekly_RAM_analize.R")
+source("weekly_processes_analize.R")
+```
+
+En este archivo se presentaran los resultados obtenidos del analisis del clusters
+en INMEGEN 
+
+```{r TotalLoad}
+# Aqui agregaremos la grafica de las cargas totales 
+
+```
+
+```{r TotalRAM}
+# Aqui agregaremos la grafica de la RAM total
+
+```
+
+```{r LoadAverage}
+# Aqui agregaremos la grafica de los load average 
+
+
+```
