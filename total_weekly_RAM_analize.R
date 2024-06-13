@@ -63,8 +63,10 @@ all_test_split <- all_test %>%
             into = c( "year", "month", "day" ),
             sep = "-", remove = FALSE )
 
+
 # Getting the number of logs by period 
-all_test_split%>% 
+all_te
+st_split%>% 
   summarize(unique(test))
 
 # Working with load average test

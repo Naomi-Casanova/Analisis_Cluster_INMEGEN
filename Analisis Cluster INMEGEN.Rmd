@@ -29,18 +29,30 @@ año que comprende desde el 30 de Abril de 2023 al 25 de Febrero de 2024.
 Las variables de interés para la realización de análisis fueron :
  
 
-
+Se encontró que el periodo con menor numero de procesos totales ejecutados fue desde
+el 10 de Octubre de 2023 al 11 de Noviembre de 2023 
+con un porcentaje del 2.5 % inicial y terminando con un 2.69 % final sobre los totales.
+Las semanas con mayor uso son :
+4 Agoto al 10 de Agosto 
+3 de Septiembre al 9 de Septiembre 
 ```{r TotalLoad}
 # Aqui agregaremos la grafica de las cargas totales 
-weekly_total_process.G
+#weekly_total_process.G
 ```
 
 ```{r TotalRAM}
 # Aqui agregaremos la grafica de la RAM total
-weekly_total_RAM_GB.G
+#weekly_total_RAM_GB.G
 ```
+Las semanas con menor promedio de carga ( sin contar la semana de Inicio de medicion ) :
+* 7 de Mayo al 13 y del 14 al 20 de Mayo 
+* 30 de julio al 5 de agosto
+* 6 de Agosto al 12 de Agosto
+
+Las de menor carga fueron 30 Julio al 5 de Agosto ,por lo que se recomienda hcer mantenimiento en ese periodo 
+
 
 ```{r LoadAverage}
 # Aqui agregaremos la grafica de los load average 
-weekly_load.G 
+#weekly_load.G 
 ```
