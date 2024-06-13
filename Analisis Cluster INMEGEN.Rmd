@@ -13,26 +13,34 @@ rm(list = ls(all.names = TRUE))
 gc()
 
 # Referenciamos los archivos de cada analisis
-source("total_weekly_processes_analize.R")
-source("total_weekly_RAM_analize.R")
-source("weekly_processes_analize.R")
+#source("total_weekly_processes_analize.R")
+#source("total_weekly_RAM_analize.R")
+#source("weekly_processes_analize.R")
 ```
 
 En este archivo se presentaran los resultados obtenidos del analisis del clusters
-en INMEGEN 
+en INMEGEN.
+
+## Introduccion 
+
+Se recopilaron las cargas registradas n cada computadora durante un periodo de un 
+año que comprende desde el 30 de Abril de 2023 al 25 de Febrero de 2024.
+
+Las variables de interés para la realización de análisis fueron :
+ 
+
 
 ```{r TotalLoad}
 # Aqui agregaremos la grafica de las cargas totales 
-
+weekly_total_process.G
 ```
 
 ```{r TotalRAM}
 # Aqui agregaremos la grafica de la RAM total
-
+weekly_total_RAM_GB.G
 ```
 
 ```{r LoadAverage}
 # Aqui agregaremos la grafica de los load average 
-
-
+weekly_load.G 
 ```
