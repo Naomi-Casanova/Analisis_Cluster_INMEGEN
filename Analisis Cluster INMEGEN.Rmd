@@ -18,41 +18,101 @@ gc()
 #source("weekly_processes_analize.R")
 ```
 
-En este archivo se presentaran los resultados obtenidos del analisis del clusters
-en INMEGEN.
 
-## Introduccion 
 
-Se recopilaron las cargas registradas n cada computadora durante un periodo de un 
-año que comprende desde el 30 de Abril de 2023 al 25 de Febrero de 2024.
+# ANALISIS CLUSTER Instituto Nacional de Medicina Genomica ( INMEGEN )
 
-Las variables de interés para la realización de análisis fueron :
- 
+## Objetivo
+El objetivo de este reporte es identificar las semanas en las cuales es optimo
+realizar el mantenimiento de los equipos de computo dentro del Instituto.
 
-Se encontró que el periodo con menor numero de procesos totales ejecutados fue desde
-el 10 de Octubre de 2023 al 11 de Noviembre de 2023 
-con un porcentaje del 2.5 % inicial y terminando con un 2.69 % final sobre los totales.
-Las semanas con mayor uso son :
-4 Agoto al 10 de Agosto 
-3 de Septiembre al 9 de Septiembre 
-```{r TotalLoad}
-# Aqui agregaremos la grafica de las cargas totales 
+## Introduccion
+Se recopilaron las cargas registradas cada 15 minutos en cada computadora del Instituto
+Nacional de Medicina Genomica durante un periodo de un año que comprende desde
+el 30 de Abril de 2023 al 25 de Febrero de 2024.
+
+Debido a la gran cantidad de informacion que habia sido extraida, para optimizar el
+tiempo de ejecucion del codigo, se tomaron unicamente las muestras pertenecientes
+a los logs de las 10:00 hrs y 22:00 hrs.
+
+Se realizaron tres analisis correspondientes a la carga promedio semanal, total
+de procesos semanales , asi como el total de memoria RAM utilizada.
+
+## Analisis de Carga Promedio Semanal ( Load Average )
+
+Se presentaran cuales son las semanas con mayor carga promedio y cuales son aquellas
+que tuvieron menor carga.
+
+En la grafica 1, se muestran las 10 semanas con menor carga promedio y las 5 semanas con
+mayor carga promedio.
+
+Nota: La semana del 30 de abril no se tomo en cuenta para nuestro top 10 de menores
+cargas debido a que esta semana, al ser el inicio de nuestra medicion, el resultado
+evidentemente seria menor.
+
+```{r LoadAverage}
+# Aqui agregaremos la grafica de load average
 #weekly_total_process.G
+
+```
+A continuacion se muestran las 10 semanas con menor carga promedio ordenadas de
+menor a mayor medicion.
+
+```{r LoadAverage.T}
+# Aqui agregaremos la tabla de los load average
+#weekly_load.T
+
 ```
 
+## Analisis del Total de Procesos Semanales
 ```{r TotalRAM}
 # Aqui agregaremos la grafica de la RAM total
 #weekly_total_RAM_GB.G
 ```
-Las semanas con menor promedio de carga ( sin contar la semana de Inicio de medicion ) :
-* 7 de Mayo al 13 y del 14 al 20 de Mayo 
-* 30 de julio al 5 de agosto
-* 6 de Agosto al 12 de Agosto
-
-Las de menor carga fueron 30 Julio al 5 de Agosto ,por lo que se recomienda hcer mantenimiento en ese periodo 
 
 
-```{r LoadAverage}
+A continuacion se muestran las 10 semanas con menor numero de RAM utilizada de
+menor a mayor medicion.
+
+```{r TotalRAM.T}
+# Aqui agregaremos la tabla de la RAM total
+#weekly_total_RAM_GB.G
+```
+
+## Analisis del Total de Procesos Semanales
+```{r TotalP}
 # Aqui agregaremos la grafica de los load average 
 #weekly_load.G 
 ```
+
+A continuacion se muestran las 10 semanas con menor numero de procesos ordenadas de
+menor a mayor medicion.
+
+```{r TotalP}
+# Aqui agregaremos la tabla de los load average 
+#weekly_load.T
+```
+
+## Conclusiones
+
+# Carga Promedio ------------
+Las semanas con menor medicion  de load average son: del 30 de julio al 12 de agosto
+con un promedio de carga de x y y.
+
+# Procesos ------------
+Se encontró que el periodo con menor numero de procesos totales ejecutados fue desde
+el 15 de Octubre de 2023 al 21 de cotubre on un porcentaje del 1.01 %
+del 29 de ocrubre al 4 de noviembre con 1.17 %
+y del 30 de julio al 5 de agosto con  total de procesos de 0.41 % y
+del 6 de agosto al 12 de agosto con 1.38 %
+
+# RAM -------------
+Las semanas con menor Ram Utilizada fueron desde el 15 de octubre al 21 de octubre ,
+con un porcentaje de uso de 2.5%
+del 22 de octubre al 28 de octubre con un porcentaje de 2.56%
+Y del 29 de octubre al 5 de noviembre con un porcentaje de 2.35 %
+
+
+Se recomienda realizar el mantenimiento del equipo  en las primeras semanas de agosto o
+en las primeras semanas de noviembre dbeido a que ahi presentamos la menor cantidad
+e carga promedio , de precesos ejecutados asi como de RAM utilizada.
