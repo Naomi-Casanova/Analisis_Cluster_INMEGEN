@@ -65,11 +65,10 @@ all_test_split <- all_test %>%
 
 
 # Getting the number of logs by period 
-all_te
-st_split%>% 
+all_test_split%>% 
   summarize(unique(test))
 
-# Working with load average test
+# Working with load memory
 load_data <- all_test_split %>% 
   filter( test == "load_mem" )%>% 
   separate( col = value,
@@ -95,7 +94,7 @@ load_data <- load_data%>%
 load_data <- load_data %>%
   select (date , time , mem_uso_gigas , mem_disp_gigas)
 
-View(load_data)
+#View(load_data)
 
 
 # Adding "n_week" and "week" columns 
@@ -109,7 +108,7 @@ load_by_week <- load_data %>%
   select( week,time,mem_uso_gigas,mem_disp_gigas)%>%
   ungroup()
 
-View(load_by_week)
+#View(load_by_week)
 # Computatitng the total of usage and available load ---------------------------
 usaged <- load_by_week %>%
   group_by( week ) %>% 
@@ -127,7 +126,7 @@ weekly_total_RAM_GB <- merge( x = usaged , y = available) %>%
   mutate ( proportion_usage = round((mem_uso_tot_GB/mem_tot_disp_GB)*100,
                                     digits = 2))
 
-View(weekly_total_RAM_GB)
+#View(weekly_total_RAM_GB)
 # Plot -------------------------------------------------------------------------
 weekly_total_RAM_GB.G <- ggplot( data = weekly_total_RAM_GB) +
   geom_bar(aes( x = week,
@@ -172,6 +171,12 @@ if (!file.exists("Graficas")) {
 write.csv(weekly_total_RAM_GB, file = "weekly_total_RAM_GB.csv", row.names = FALSE)
 
 ggsave("weekly_total_RAM_GB.png", plot = weekly_total_RAM_GB.G,width = 13.3, height = 7.5)
+
+# Creating tableswith the Top 5 of lowest and highest total of process
+top5_high_RAM <-  weekly_total_RAM_GB %>%
+                  slice_max(order_by = proportion_usage, n = 5)
+top5_low_RAM <-  weekly_total_RAM_GB %>%
+                 slice_min(order_by = proportion_usage, n = 5)
 
 
 
