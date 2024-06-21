@@ -71,82 +71,85 @@ load_data <- all_test_split %>%
 
 # Adding "n_week" and "week" columns 
 load_by_week <- load_data %>%
-                mutate( n_of_week = if_else( month(date) == 12 & week(date) == 53 , 52 ,  
-                               week(date)))  %>%
-                group_by(  n_of_week ) %>% 
-                mutate(  start_of_week = floor_date( min(date) , "week" ),
-                         end_of_week = start_of_week + days(6) ,
-                         week = paste(start_of_week,end_of_week, sep = ' / ')) %>%
-                select( week,time,load,max_load,registered_name)%>%
-                ungroup()
+  mutate( n_of_week = if_else( month(date) == 12 & week(date) == 53 , 52 ,  
+                               week(date))) %>%
+  group_by(  n_of_week ) %>% 
+  summarise( start_of_week = floor_date( min(date) , "week" ),
+             end_of_week = start_of_week + days(6),
+             weekly_usage_load_mean = mean( load_usage_fraction )) %>% 
+  arrange( start_of_week ) %>% 
+  mutate ( week = paste(start_of_week,end_of_week, sep = ' / ')) %>%
+  ungroup( ) %>% 
+  select(week,weekly_usage_load_mean )
 
-# Computatitng the total of usage and available load ---------------------------
-usaged <- load_by_week %>%
-          group_by( week ) %>% 
-          summarise( carga_tot_usad = sum(load)) %>%
-          ungroup( )
 
-available <- load_by_week %>%
-             filter( time == "22H 0M 0S") %>%
-             group_by( week ) %>% 
-             distinct(registered_name, .keep_all = TRUE)%>%
-             summarise( carga_tot_dispo = sum(max_load)) %>%
-             ungroup( )
+#View(weekly_load)
 
-# Merge de data with the totals 
- weekly_load <- merge( x = usaged , y = available) %>%
-                 mutate ( proportion_usage = round((carga_tot_usad/carga_tot_dispo)*100,
-                                                    digits = 2))
-               
+#sorted data from highest to lowest load average 
+sorted_weekly_data <- load_by_week %>% 
+                      arrange( -weekly_usage_load_mean )
+
+#View(sorted_weekly_data)
 
 # Saving the data 
-write.table(sorted_weekly_data, "total_weekly_process.tsv", sep="\t", row.names=FALSE)
+#write.table(sorted_weekly_data, "sorted_weekly_load_average.tsv", sep="\t", row.names=FALSE)
 
-# Plot -------------------------------------------------------------------------
-weekly_load.G <- ggplot( data = weekly_load) +
-  geom_bar(aes( x = week,
-                y = carga_tot_dispo , fill = "Disponibles" ),
-           stat = "identity" ,alpha =0.4 )  +
-  geom_bar(aes( x = week,
-                y = carga_tot_usad, color ="Utilizados"),
-           stat = "identity", fill = "mediumpurple") +
-  geom_text(aes(x = week, y = carga_tot_usad, 
-            label =paste0(proportion_usage , "%")),
-            vjust = -1,
-            color = "black",
-            size = 2) +
-  labs( title = "Carga total de procesadores",
+
+# Lowest loads in  weekly load average 
+n <- length(load_by_week$weekly_usage_load_mean)
+lowest_loads <- sorted_weekly_data[ (n-9) :n,]
+
+# Plot
+load_plot <- ggplot( data = load_by_week,
+        mapping = aes( x = week,
+                       y = weekly_usage_load_mean ) ) +
+  geom_line( color = "darkturquoise" ,
+             linewidth  = 0.75,
+             mapping = aes( group = 1 ) )  +
+  geom_point( color = "darkturquoise" ,
+              size  = 1.5 )  +
+  geom_point( data = lowest_loads,
+              color = "red",
+             size = 2)+
+  scale_y_continuous( labels = percent ) +
+  labs( title = "Carga de procesadores",
         subtitle = "load_avg_1min",
-        caption = "Calculado a partir de logs a las 10AM y 10PM",
-        color = NULL ,
-        fill = "Total de Procesos\n") +
-  ylab("Numero de procesos") +
+        caption = "calculado a partir de logs a las 10AM y 10PM" ) +
+  ylab("Promedio de carga semanal utilizada") +
   xlab("Semana") +
   theme_classic( ) +
   theme( plot.title=element_text( face='bold', size=16),
          plot.subtitle=element_text(size=12),
-         plot.caption = element_text(size=6),
          axis.title.x = element_text(size=10),
          axis.title.y = element_text(size=10),
-         legend.title = element_text(size = 10),
          panel.background = element_rect( fill = "white"),
          panel.grid.major.y   = element_line(color = "gray95",
                                              linewidth  = 0.5,
                                              linetype = 1) ,
          panel.grid.major.x  = element_line(  color = "transparent")   ) +
-  theme(axis.text.x = element_text(angle = 65, hjust = 1,size = 6.5)) +
-  scale_color_manual(values=c("transparent","transparent"))+
-  scale_fill_manual(values = c("Disponibles" = alpha("mediumpurple", 0.4), "Utilizados" = "blue")) 
+  theme(axis.text.x = element_text(angle = 65, hjust = 1,size = 6.5)) 
+
+
+
+
+
+
+# Plot -------------------------------------------------------------------------
 
 # Saving the plot and the table in a new carpet called "Graficas"
 if (!file.exists("Graficas")) {
   dir.create("Graficas")
 }
 
-write.csv(weekly_load, file = "weekly_load.csv", row.names = FALSE)
+write.csv(load_by_week, file = "weekly_load.csv", row.names = FALSE)
 
-ggsave("weekly_load.png", plot = weekly_load.G ,width = 13.3, height = 7.5)
+ggsave("weekly_load.png", plot = load_plot ,width = 13.3, height = 7.5)
 
+# Creating tableswith the Top 10 of lowest load average
+top5_high_load <-  load_by_week %>%
+                  slice_max(order_by = weekly_usage_load_mean, n = 5)
+top5_low_load <-  load_by_week %>%
+  slice_min(order_by = weekly_usage_load_mean, n = 5)
 
 
 
