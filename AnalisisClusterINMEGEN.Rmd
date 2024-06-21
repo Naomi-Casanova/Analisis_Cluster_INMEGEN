@@ -1,0 +1,121 @@
+---
+title: "Analisis Cluster Instituto Nacional de Medicina Genomica ( INMEGEN )"
+author: "Naomi Casanova"
+date: "2024-06-11"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+#limpiando el ambiente
+
+#rm(list = ls(all.names = TRUE))
+#gc()
+
+# Referenciamos los archivos de cada analisis
+source("total_weekly_processes_analize.R")
+source("total_weekly_RAM_analize.R")
+source("weekly_proccess_analize.R")
+```
+
+
+## Objetivo
+El objetivo de este reporte es identificar las semanas en las cuales es optimo
+realizar el mantenimiento de los equipos de computo dentro del Instituto.
+
+## Introduccion
+Se recopilaron las cargas registradas cada 15 minutos en cada computadora del Instituto
+Nacional de Medicina Genomica durante un periodo de un año que comprende desde
+el 30 de Abril de 2023 al 25 de Febrero de 2024.
+
+Debido a la gran cantidad de informacion que habia sido extraida, para optimizar el
+tiempo de ejecucion del codigo, se tomaron unicamente las muestras pertenecientes
+a los logs de las 10:00 hrs y 22:00 hrs.
+
+Se realizaron tres analisis correspondientes a la carga promedio semanal, total
+de procesos semanales , asi como el total de memoria RAM utilizada.
+
+## Analisis de Carga Promedio Semanal ( Load Average )
+
+Se presentaran cuales son las semanas con mayor carga promedio y cuales son aquellas
+que tuvieron menor carga.
+
+En la grafica 1, se muestran las 10 semanas con menor carga promedio y las 5 semanas con
+mayor carga promedio.
+
+Nota: La semana del 30 de abril no se tomo en cuenta para nuestro top 10 de menores
+cargas debido a que esta semana, al ser el inicio de nuestra medicion, el resultado
+evidentemente seria menor.
+
+```{r LoadAverage}
+# Aqui agregaremos la grafica de load average
+
+load_plot
+
+```
+A continuacion se muestran las 10 semanas con menor carga promedio ordenadas de
+menor a mayor medicion.
+
+```{r LoadAverageT}
+# Aqui agregaremos las tablas de los load average
+
+top5_low_load
+
+```
+
+## Analisis del Total de Procesos Semanales
+```{r TotalRAM}
+# Aqui agregaremos la grafica de la RAM total
+weekly_total_RAM_GB.G
+
+```
+
+
+A continuacion se muestran las 10 semanas con menor numero de RAM utilizada de menor a mayor medicion.
+
+```{r TotalRAMT}
+# Aqui agregaremos la tabla de la RAM total
+ top5_low_RAM
+```
+
+## Analisis del Total de Procesos Semanales
+```{r TotalP}
+# Aqui agregaremos la grafica de los procesos totales 
+weekly_total_process.G
+
+```
+
+A continuacion se muestran las 10 semanas con menor numero de procesos ordenadas de
+menor a mayor medicion.
+
+```{r Totalt}
+# Aqui agregaremos la tabla de los procesos
+top5_low_process
+```
+
+## Conclusiones
+
+# Carga Promedio ------------
+Las semanas con menor medicion  de load average son: del 30 de julio al 12 de agosto
+con un promedio de carga de x y y.
+
+# Procesos ------------
+Se encontró que el periodo con menor numero de procesos totales ejecutados fue desde
+el 15 de Octubre de 2023 al 21 de cotubre on un porcentaje del 1.01 %
+del 29 de ocrubre al 4 de noviembre con 1.17 %
+y del 30 de julio al 5 de agosto con  total de procesos de 0.41 % y
+del 6 de agosto al 12 de agosto con 1.38 %
+
+# RAM -------------
+Las semanas con menor Ram Utilizada fueron desde el 15 de octubre al 21 de octubre ,
+con un porcentaje de uso de 2.5%
+del 22 de octubre al 28 de octubre con un porcentaje de 2.56%
+Y del 29 de octubre al 5 de noviembre con un porcentaje de 2.35 %
+
+Se recomienda realizar el mantenimiento del equipo  en las primeras semanas de agosto o
+en las primeras semanas de noviembre dbeido a que ahi presentamos la menor cantidad
+e carga promedio , de precesos ejecutados asi como de RAM utilizada.
