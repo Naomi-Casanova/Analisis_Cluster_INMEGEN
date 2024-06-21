@@ -136,14 +136,24 @@ available <- load_by_week %>%
   scale_fill_manual(values = c("Disponibles" = alpha("mediumpurple", 0.4), "Utilizados" = "blue")) 
 
  # Saving the plot and the table in a new carpet called "Graficas"
- dir.create("Graficas")
- 
+ if (!file.exists("Graficas")) {
+   dir.create("Graficas")
+ }
  write.csv(weekly_total_process, file = "weekly_total_process.csv", row.names = FALSE)
  
  ggsave("weekly_total_process.png", plot = weekly_total_process.G,width = 13.3, height = 7.5)
  
+ #View(weekly_total_process)
+ # Creating tableswith the Top 5 of lowest and highest total of process
+ top5_high_process <-  weekly_total_process %>%
+                       slice_max(order_by = proportion_usage, n = 5)
+ top5_low_process <-  weekly_total_process %>%
+                      slice_min(order_by = proportion_usage, n = 5)
  
-
+ 
+ 
+ 
+ 
 
 
 
