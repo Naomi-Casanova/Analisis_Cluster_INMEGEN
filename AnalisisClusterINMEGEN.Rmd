@@ -1,11 +1,12 @@
 ---
-title: "Analisis Cluster Instituto Nacional de Medicina Genomica ( INMEGEN )"
+title: "Analisis Cluster Instituto Nacional de Medicina Genomica 
+(INMEGEN)"
 author: "Naomi Casanova"
 date: "2024-06-11"
 output:
+  pdf_document: default
   html_document:
     df_print: paged
-  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -15,6 +16,9 @@ knitr::opts_chunk$set(echo = FALSE)
 
 #rm(list = ls(all.names = TRUE))
 #gc()
+
+library(flextable)
+set_flextable_defaults(fonts_ignore = TRUE)
 
 # Referenciamos los archivos de cada analisis
 source("total_weekly_processes_analize.R")
@@ -64,7 +68,10 @@ menor a mayor medicion.
 ```{r LoadAverageT}
 # Aqui agregaremos las tablas de los load average
 
-top5_low_load
+top5_low_load%>%
+  flextable()%>%
+  autofit()
+
 
 ```
 
@@ -80,7 +87,10 @@ A continuacion se muestran las 10 semanas con menor numero de RAM utilizada de m
 
 ```{r TotalRAMT}
 # Aqui agregaremos la tabla de la RAM total
- top5_low_RAM
+ top5_low_RAM%>%
+  flextable()%>%
+  autofit()
+
 ```
 
 ## Analisis del Total de Procesos Semanales
@@ -95,27 +105,31 @@ menor a mayor medicion.
 
 ```{r Totalt}
 # Aqui agregaremos la tabla de los procesos
-top5_low_process
+top5_low_process %>%
+  flextable()%>%
+  autofit()
+
 ```
 
-## Conclusiones
+## Resultados
 
-# Carga Promedio
+### Carga Promedio
 La semana con menor medición  de load average son: del 30 de julio al 5 de agosto
 con un promedio de carga de 0.00228.
 
-# Procesos
+### Procesos
 Se encontró que el periodo con menor numero de procesos totales ejecutados fue desde
 el 15 de Octubre de 2023 al 21 de octubre con un porcentaje del 1.01 %
 del 29 de octubre al 4 de noviembre con 1.17 %
 y del 30 de julio al 5 de agosto con  total de procesos de 0.41 % y
 del 6 de agosto al 12 de agosto con 1.38 %
 
-# RAM
+### RAM
 Las semanas con menor RAM Utilizada fueron desde el 15 de octubre al 21 de octubre ,
 con un porcentaje de uso de 2.5%
 del 22 de octubre al 28 de octubre con un porcentaje de 2.56%
 Y del 29 de octubre al 5 de noviembre con un porcentaje de 2.35 %
 
+## Conclusiones
 Podemos apreciar que aunque en las primeras semanas de Agosto, la proporción de uso de RAM no se encuentra en el top de las 10 menores, en estas semanas la cantidad de procesos ejecutados y la carga promedio se mantiene baja, por lo que es recomendable realizar el mantenimiento del equipo  en las primeras semanas de agosto que comprenden del 30 de Julio al 12 de Agosto. 
 
