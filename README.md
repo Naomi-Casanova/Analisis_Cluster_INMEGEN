@@ -5,6 +5,7 @@ Análisis de las cargas totales y el uso de RAM semanal en las computadoras en I
 Codigo base que reproduce mi analisis de memoria RAM utilizada y cargas semanales
 ===  
 Contenido
+- 1 archivo RMarkdown que muestra los resultados del analisis en un PDF.
 - 3 Scripts para realizar cada uno de los siguientes analisis :
   - Cargas Promedio semanales (  weekly_proccess_analize.R  ) 
   - Numero total de procesos semanales ( total_weekly_proccesses_analize.R  ) 
@@ -37,7 +38,11 @@ OUTPUTS:
 
     - weekly_Process.csv tabla que resume la carga promedio semanal;  
     - weekly_Process.png grafica ilustrativa de los datos generados en weekly_Process.csv;
-     
+
+4) Script : " AnalisisClusterINMEGEN.RMarkdown "
+   
+    - AnalisisClusterINMEGEN.pdf archivo PDF que resume los resultados de los analisis ; 
+
 ---
 ### Features
   **-v 0.0.1**
@@ -53,7 +58,14 @@ OUTPUTS:
 * Windows 11
 
 #### OS incompatible:
-* DESCONOCIDO  
+* DESCONOCIDO
+
+#### Para generar el PDF se requiere tener instalado LaTeX o en su defecto instalar las siguientes 
+#### paqueterias en R :
+* "rmarkdown"
+*  "devtools"
+*  "tinytex"
+*  "xfun"
 
 \* El codigo puede correr en LINUX y macOS pero se necesitan pruebas.  
 
@@ -83,8 +95,11 @@ git clone git@github.com:Naomi-Casanova/Analisis_SNI.git
 
 ## Replica mi analisis!:
 
-* Tiempo de ejecucion estimado por archivo :  **5 minuto(s)**  
+ Generacion Reporte en PDF : 
+ Da click en el boton "source" de RStudio y se generara el archivo del reporte. 
+* Tiempo de ejecucion estimado para generar el analisis en PDF :  **15 minuto(s)**  
 
+---
 1. Abre el script:  
 ```
 weekly_proccess_analize.R 
@@ -105,7 +120,9 @@ total_weekly_RAM_analize.R
 ```
 6. Da click en el boton "source" de RStudio.
 
-7. Revisa los resultados en la carpeta ./Graficas/  
+7. Revisa los resultados en la carpeta ./Graficas/
+   
+* Tiempo de ejecucion estimado por archivo :  **5 minuto(s)**  
 
 ---
 
